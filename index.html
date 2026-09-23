@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Happy Birthday Musu! ❤️ | Special Surprise Gifts</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #ff5e8e;
+      --primary-soft: #ffe4ec;
+      --text-dark: #4a2040;
+      --text-light: #7c5874;
+      --bg-pink: linear-gradient(135deg, #fff0f5 0%, #fde2e4 50%, #fad2e1 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-pink);
+      color: var(--text-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Lightweight Ambient FX Canvas */
+    #fxCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Music Bar */
+    .music-bar {
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 120;
+    }
+    .music-pill {
+      background: #ffffff;
+      border: 1.5px solid #ffccd5;
+      padding: 7px 16px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255, 154, 162, 0.2);
+      color: #b03060;
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+    .music-icon {
+      display: inline-block;
+      transition: transform 0.3s;
+    }
+    .music-pill.playing .music-icon {
+      animation: spinVinyl 4s linear infinite;
+    }
+    @keyframes spinVinyl { 100% { transform: rotate(360deg); } }
+
+    .yt-song-pill {
+      background: linear-gradient(135deg, #ff407d, #ff758c);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 12px rgba(255, 64, 125, 0.25);
+    }
+
+    .page-wrapper {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 55px 16px 80px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-header {
+      margin-bottom: 25px;
+    }
+    .hero-tag {
+      display: inline-block;
+      padding: 5px 18px;
+      background: #ffffff;
+      border: 1.5px solid #ffccd5;
+      border-radius: 20px;
+      color: #d63384;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .hero-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.8rem;
+      color: #c9184a;
+      line-height: 1.15;
+      margin-bottom: 6px;
+    }
+    .hero-subtitle {
+      font-size: 1rem;
+      color: var(--text-light);
+      max-width: 580px;
+      margin: 0 auto 18px;
+      line-height: 1.5;
+    }
+
+    .balloon-instruction {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #a61e4d;
+      background: #ffffff;
+      display: inline-block;
+      padding: 7px 20px;
+      border-radius: 25px;
+      border: 1px dashed #ff85a1;
+      margin-bottom: 25px;
+    }
+
+    /* Balloons Grid */
+    .balloons-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px 14px;
+      max-width: 800px;
+      margin: 0 auto 45px;
+    }
+    @media (max-width: 700px) {
+      .balloons-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-title { font-size: 2.8rem; }
+    }
+
+    .balloon-box {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      will-change: transform;
+      animation: floatSmooth 4s ease-in-out infinite;
+    }
+    .balloon-box:nth-child(even) { animation-delay: 1.5s; }
+    .balloon-box:nth-child(3n) { animation-delay: 2.2s; }
+    .balloon-box:nth-child(4n) { animation-delay: 0.8s; }
+
+    @keyframes floatSmooth {
+      0%, 100% { transform: translate3d(0, 0, 0); }
+      50% { transform: translate3d(0, -10px, 0); }
+    }
+
+    .balloon-oval {
+      width: 95px;
+      height: 115px;
+      border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      box-shadow: inset 6px 6px 14px rgba(255, 255, 255, 0.6), inset -5px -5px 10px rgba(0, 0, 0, 0.08), 0 10px 20px rgba(255, 107, 129, 0.2);
+    }
+    .balloon-oval::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-bottom: 7px solid currentColor;
+    }
+    .balloon-tail-string {
+      width: 2px;
+      height: 32px;
+      background: linear-gradient(to bottom, rgba(166, 30, 77, 0.35), rgba(166, 30, 77, 0.05));
+      margin-top: 5px;
+    }
+
+    .b-hue-1 { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); color: #ff758c; }
+    .b-hue-2 { background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); color: #b993ff; }
+    .b-hue-3 { background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%); color: #ff85a1; }
+    .b-hue-4 { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); color: #48cae4; }
+    .b-hue-5 { background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); color: #9d8df1; }
+    .b-hue-6 { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); color: #f39c12; }
+    .b-hue-7 { background: linear-gradient(135deg, #ff9a8b 0%, #ff6a88 100%); color: #ff407d; }
+    .b-hue-8 { background: linear-gradient(135deg, #cfd9df 0%, #e2ebf0 100%); color: #7f8c8d; }
+
+    .balloon-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .balloon-sub-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #ffffff;
+      background: rgba(0,0,0,0.15);
+      padding: 1px 7px;
+      border-radius: 10px;
+      margin-top: 3px;
+    }
+    .balloon-title-tag {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #8b2650;
+      background: #ffffff;
+      padding: 4px 10px;
+      border-radius: 12px;
+      border: 1px solid #ffd1dc;
+      box-shadow: 0 4px 10px rgba(220, 100, 145, 0.1);
+      white-space: nowrap;
+    }
+
+    /* Cake Section */
+    .grand-cake-section {
+      background: #ffffff;
+      border: 2px dashed #ff85a1;
+      border-radius: 26px;
+      padding: 35px 16px 40px;
+      max-width: 650px;
+      margin: 0 auto 40px;
+      box-shadow: 0 10px 30px rgba(220, 100, 145, 0.12);
+      position: relative;
+    }
+    .cake-section-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.8rem;
+      color: #c9184a;
+      margin-bottom: 4px;
+    }
+    .cake-section-desc {
+      font-size: 0.92rem;
+      color: var(--text-light);
+      margin-bottom: 22px;
+    }
+
+    .interactive-cake-stage {
+      position: relative;
+      width: 280px;
+      height: 250px;
+      margin: 0 auto;
+    }
+
+    .cake-candles-row {
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 14px;
+      z-index: 5;
+    }
+    .candle-stick {
+      width: 8px;
+      height: 30px;
+      background: repeating-linear-gradient(45deg, #fff, #fff 4px, #ff407d 4px, #ff407d 8px);
+      border-radius: 3px;
+      position: relative;
+    }
+    .candle-flame {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 14px;
+      background: #ffd166;
+      border-radius: 50% 50% 20% 20% / 60% 60% 40% 40%;
+      box-shadow: 0 0 8px #ff9800;
+    }
+
+    .cake-tier-link {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-decoration: none;
+      display: block;
+      transition: transform 0.2s ease;
+    }
+    .cake-tier-link:active {
+      transform: translateX(-50%) scale(0.97);
+    }
+
+    .tier-top {
+      top: 38px;
+      width: 135px;
+      height: 50px;
+      background: linear-gradient(135deg, #ff758c 0%, #ff5e8e 100%);
+      border-radius: 12px 12px 6px 6px;
+      border: 2px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 15px rgba(220, 100, 145, 0.2);
+    }
+    .tier-middle {
+      top: 92px;
+      width: 195px;
+      height: 58px;
+      background: linear-gradient(135deg, #ffd166 0%, #fbc2eb 100%);
+      border-radius: 12px 12px 6px 6px;
+      border: 2px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 15px rgba(220, 100, 145, 0.2);
+    }
+    .tier-bottom {
+      top: 154px;
+      width: 250px;
+      height: 70px;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      border-radius: 12px 12px 6px 6px;
+      border: 2px solid #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 15px rgba(220, 100, 145, 0.2);
+    }
+
+    .tier-badge {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 3px 10px;
+      border-radius: 10px;
+      color: #c9184a;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    /* Modals (No Heavy Blurs for High Performance) */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(45, 10, 30, 0.75);
+      z-index: 250;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-overlay.active { display: flex; }
+
+    .envelope-trigger-card {
+      background: #ffffff;
+      border: 2px solid #ffccd5;
+      border-radius: 22px;
+      padding: 30px 20px;
+      text-align: center;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+    .envelope-icon-wrap {
+      width: 80px;
+      height: 80px;
+      background: #ffe4ec;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 14px;
+    }
+    .open-letter-prompt-btn {
+      background: linear-gradient(135deg, #ff407d, #ff758c);
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(255, 64, 125, 0.3);
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .opened-letter-sheet {
+      display: none;
+      background: #ffffff;
+      border: 1px solid #ffd1dc;
+      border-radius: 18px;
+      padding: 26px 20px;
+      max-width: 520px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+      position: relative;
+    }
+
+    .modal-close-x {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid #ffd1dc;
+      background: #fff0f5;
+      color: #c9184a;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dua-wrapper-box {
+      background: #fff5f8;
+      border: 1.5px dashed #ff85a1;
+      border-radius: 16px;
+      padding: 16px 14px;
+      margin: 16px 0;
+    }
+    .dua-illustration-img {
+      width: 100%;
+      max-width: 220px;
+      height: auto;
+      border-radius: 14px;
+      margin: 0 auto 10px;
+      display: block;
+      border: 2px solid #ffffff;
+    }
+    .single-photo-box {
+      background: #ffffff;
+      border: 1px solid #ffccd5;
+      padding: 8px 8px 12px;
+      border-radius: 12px;
+      max-width: 270px;
+      margin: 10px auto 14px;
+    }
+    .single-photo-box img {
+      width: 100%;
+      max-height: 270px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .romantic-shayari-card {
+      background: #fff8fa;
+      border-left: 4px solid #ff407d;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 14px 0;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: #8b104e;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    /* Layer 1 Flying Words */
+    .assembled-banner-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 240, 245, 0.96);
+      z-index: 300;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 16px;
+    }
+    .assembled-banner-container.active { display: flex; }
+
+    .fly-words-stage {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 780px;
+      margin: 20px 0 28px;
+    }
+    .fly-word {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #c9184a, #ff407d, #f72585);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      opacity: 0;
+    }
+    @media (max-width: 600px) { .fly-word { font-size: 2rem; } }
+
+    .from-left { animation: flyLeft 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) forwards; }
+    .from-right { animation: flyRight 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) 0.2s forwards; }
+    .from-top { animation: flyTop 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) 0.4s forwards; }
+    .from-bottom { animation: flyBottom 0.8s cubic-bezier(0.2, 0.9, 0.3, 1) 0.6s forwards; }
+
+    @keyframes flyLeft {
+      0% { opacity: 0; transform: translate3d(-180px, 0, 0) scale(0.6); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    }
+    @keyframes flyRight {
+      0% { opacity: 0; transform: translate3d(180px, 0, 0) scale(0.6); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    }
+    @keyframes flyTop {
+      0% { opacity: 0; transform: translate3d(0, -150px, 0) scale(0.6); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    }
+    @keyframes flyBottom {
+      0% { opacity: 0; transform: translate3d(0, 150px, 0) scale(0.6); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    }
+
+    /* Formal Fast Slideshow */
+    .formal-slideshow-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(18, 5, 15, 0.97);
+      z-index: 500;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .formal-slideshow-overlay.active { display: flex; }
+
+    .slideshow-stage-box {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      height: 440px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @media (max-width: 600px) {
+      .slideshow-stage-box { height: 360px; max-width: 300px; }
+    }
+
+    .formal-polaroid-frame {
+      background: #ffffff;
+      padding: 12px 12px 18px;
+      border-radius: 16px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+      position: relative;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .formal-slide-img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    @media (max-width: 600px) {
+      .formal-slide-img { height: 250px; }
+    }
+
+    .formal-slide-badge {
+      position: absolute;
+      top: -10px;
+      left: 14px;
+      background: linear-gradient(135deg, #ff407d, #d6225b);
+      color: #fff;
+      padding: 3px 12px;
+      border-radius: 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .formal-slide-caption {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      color: #3b0933;
+      margin-top: 8px;
+      font-weight: 700;
+    }
+
+    .fly-in-left { animation: fLeft 0.6s cubic-bezier(0.2, 0.9, 0.3, 1) forwards; }
+    .fly-in-right { animation: fRight 0.6s cubic-bezier(0.2, 0.9, 0.3, 1) forwards; }
+    .fly-in-top { animation: fTop 0.6s cubic-bezier(0.2, 0.9, 0.3, 1) forwards; }
+    .fly-in-bottom { animation: fBottom 0.6s cubic-bezier(0.2, 0.9, 0.3, 1) forwards; }
+    .fly-in-center { animation: fCenter 0.6s cubic-bezier(0.2, 0.9, 0.3, 1) forwards; }
+
+    @keyframes fLeft {
+      0% { opacity: 0; transform: translate3d(-150px, 0, 0) scale(0.7); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    }
+    @keyframes fRight {
+      0% { opacity: 0; transform: translate3d(150px, 0, 0) scale(0.7); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    }
+    @keyframes fTop {
+      0% { opacity: 0; transform: translate3d(0, -140px, 0) scale(0.7); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    }
+    @keyframes fBottom {
+      0% { opacity: 0; transform: translate3d(0, 140px, 0) scale(0.7); }
+      100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+    }
+    @keyframes fCenter {
+      0% { opacity: 0; transform: scale(0.4); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .slideshow-nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .slide-ctrl-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+    }
+
+    .next-step-btn {
+      background: linear-gradient(135deg, #ff407d, #ff758c);
+      color: #fff;
+      border: none;
+      padding: 11px 26px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border-radius: 25px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="fxCanvas"></canvas>
+
+  <div class="music-bar">
+    <button class="yt-song-pill" onclick="openYouTubeSong()" title="Play Princess Birthday Song">
+      <span>👑 Princess Song</span>
+    </button>
+    <div class="music-pill" id="musicBtn" onclick="toggleMusic()" title="Play / Pause Background Melody">
+      <span class="music-icon">🎵</span>
+      <span class="music-label">Melody</span>
+    </div>
+  </div>
+
+  <audio id="bgAudio" loop preload="none">
+    <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Happy_Birthday/Happy_Birthday_Instrumental.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="princessAudio" loop preload="none">
+    <source src="herpic.jpg/princess_song.m4a" type="audio/mp4">
+    <source src="herpic.jpg/princess_song.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="page-wrapper">
+    
+    <header class="hero-header">
+      <span class="hero-tag">✨ A Sweet Surprise Celebration ✨</span>
+      <h1 class="hero-title">Happy Birthday, Musu! 🌸</h1>
+      <p class="hero-subtitle">
+        Every balloon holds a hidden mystery from my heart. Tap any balloon to reveal what's waiting for you!
+      </p>
+      <div class="balloon-instruction">
+        🎈 Tap a surprise balloon to unlock! 👇
+      </div>
+    </header>
+
+    <div class="balloons-grid">
+      <div class="balloon-box" onclick="triggerBalloonOpen(1)">
+        <div class="balloon-oval b-hue-1">
+          <span class="balloon-number">1</span>
+          <span class="balloon-sub-label">Mystery</span>
+        </div>
+        <div class="balloon-tail-string"></div>
+        <div class="balloon-title-tag">🎁 Surprise 1: For You</div>
+      </div>
+
+      <div class="balloon-box" onclick="triggerBalloonOpen(2)">
+        <div class="balloon-oval b-hue-2">
+          <span class="balloon-number">2</span>
+          <span class="balloon-sub-label">Mystery</span>
+        </div>
+        <div class="balloon-tail-string"></div>
+        <div class="balloon-title-tag">🎀 Gift 2: Just For You</div>
+      </div>
+
+      <div class="balloon-box" onclick="triggerBalloonOpen(3)">
+        <div class="balloon-oval b-hue-3">
+          <span class="balloon-number">3</span>
+          <span class="balloon-sub-label">Mystery</span>
+        </div>
+        <div class="balloon-tail-string"></div>
+        <div class="balloon-title-tag">✨ Gift 3: Dil Se For You</div>
+      </div>
+
+      <div class="balloon-box" onclick="triggerBalloonOpen(4)">
+        <div class="balloon-oval b-hue-4">
+          <span class="balloon-number">4</span>
+          <span class="balloon-sub-label">Mystery</span>
+        </div>
+        <div class="balloon-tail-string"></div>
+        <div class="balloon-title-tag">🌟 Gift 4: A Wish For You</div>
+      </div>
+
+      <div class="balloon-box" onclick="triggerBalloonOpen(5)">
+        <div class="balloon-oval b-hue-5">
+          <span class="balloon-number">5</span>
+          <span class="balloon-sub-label">Mystery</span>
+        </div>
+        <div class="balloon-tail-string"></div>
+        <div class="balloon-title-tag">💌 Gift 5: Only For You</div>
+      </div>
+
+      <div class="balloon-box" onclick="triggerBalloonOpen(6)">
+        <div class="balloon-oval b-hue-6">
+          <span class="balloon-number">6</span>
+          <span class="balloon-sub-label">Mystery</span>
+        </div>
+        <div class="balloon-tail-string"></div>
+        <div class="balloon-title-tag">🤲 Gift 6: Special Blessing</div>
+      </div>
+
+      <div class="balloon-box" onclick="triggerBalloonOpen(7)">
+        <div class="balloon-oval b-hue-7">
+          <span class="balloon-number">7</span>
+          <span class="balloon-sub-label">Mystery</span>
+        </div>
+        <div class="balloon-tail-string"></div>
+        <div class="balloon-title-tag">💖 Gift 7: Little Secret</div>
+      </div>
+
+      <div class="balloon-box" onclick="triggerBalloonOpen(8)">
+        <div class="balloon-oval b-hue-8">
+          <span class="balloon-number">8</span>
+          <span class="balloon-sub-label">Mystery</span>
+        </div>
+        <div class="balloon-tail-string"></div>
+        <div class="balloon-title-tag">👑 Gift 8: Grand Surprise</div>
+      </div>
+    </div>
+
+    <!-- 3-Tier Cake -->
+    <div class="grand-cake-section" id="cakeSection">
+      <h2 class="cake-section-title">The Magical 3-Layer Birthday Cake 🎂</h2>
+      <p class="cake-section-desc">Each tier holds a distinct magical celebration. Click the links on the cake!</p>
+
+      <div class="interactive-cake-stage">
+        <div class="cake-candles-row">
+          <div class="candle-stick"><div class="candle-flame"></div></div>
+          <div class="candle-stick"><div class="candle-flame"></div></div>
+          <div class="candle-stick"><div class="candle-flame"></div></div>
+        </div>
+
+        <!-- LINK 1: TOP LAYER -->
+        <a href="javascript:void(0)" class="cake-tier-link tier-top" onclick="triggerCakeLayer1()">
+          <span class="tier-badge">Layer 1: Flying Words ✨</span>
+        </a>
+
+        <!-- LINK 2: MIDDLE LAYER -->
+        <a href="javascript:void(0)" class="cake-tier-link tier-middle" onclick="triggerCakeLayer2()">
+          <span class="tier-badge">Layer 2: Message & Gift 🎁</span>
+        </a>
+
+        <!-- LINK 3: BOTTOM LAYER -->
+        <a href="javascript:void(0)" class="cake-tier-link tier-bottom" onclick="triggerCakeLayer3()">
+          <div style="font-family: 'Caveat', cursive; font-size: 1.25rem; font-weight: 700; color: #8b104e;">Happy Birthday Musu ❤️</div>
+          <span class="tier-badge" style="font-size: 0.68rem; margin-top: 2px;">Layer 3: 3D Photo Show 📸</span>
+        </a>
+      </div>
+      
+      <p style="font-size: 0.85rem; color: #a61e4d; font-weight: 600; margin-top: 15px;">
+        👆 Click Layer 1, Layer 2, or Layer 3 directly on the cake!
+      </p>
+    </div>
+
+  </div>
+
+  <!-- BALLOON MODAL -->
+  <div class="modal-overlay" id="balloonModal">
+    <div class="envelope-trigger-card" id="envelopePromptCard">
+      <button class="modal-close-x" onclick="closeAllModals()">✕</button>
+      <div class="envelope-icon-wrap" id="promptIcon">🎁</div>
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #c9184a; margin-bottom: 8px;" id="promptTitle">
+        Surprise Waiting For You
+      </h3>
+      <p style="color: #7c5874; font-size: 0.92rem; line-height: 1.5;">
+        A special hidden secret from the heart is wrapped inside...
+      </p>
+      <button class="open-letter-prompt-btn" onclick="revealLetterContent()">
+        <span>✨ Open this, Birthday Girl! 💖</span>
+      </button>
+    </div>
+
+    <div class="opened-letter-sheet" id="openedLetterSheet">
+      <button class="modal-close-x" onclick="closeAllModals()">✕</button>
+      <div id="dynamicLetterBody"></div>
+    </div>
+  </div>
+
+  <!-- LAYER 1 BANNER -->
+  <div class="assembled-banner-container" id="layer1Banner">
+    <button class="modal-close-x" onclick="closeLayer1()" style="position: absolute; top: 18px; right: 20px;">✕</button>
+    <div style="font-size: 2rem;">✨🎉✨</div>
+    <div class="fly-words-stage">
+      <span class="fly-word from-left" id="word1">HAPPY</span>
+      <span class="fly-word from-top" id="word2">BIRTHDAY</span>
+      <span class="fly-word from-right" id="word3">MY</span>
+      <span class="fly-word from-bottom" id="word4">MUSU! ❤️</span>
+    </div>
+    <p style="font-family: 'Dancing Script', cursive; font-size: 1.6rem; color: #a61e4d; font-weight: 700; margin-bottom: 18px;">
+      "May your life be as bright and beautiful as your precious smile!"
+    </p>
+    <button class="next-step-btn" onclick="closeLayer1(); triggerCakeLayer2();">
+      <span>Now Open Layer 2 (Message & Gift) ➔</span>
+    </button>
+  </div>
+
+  <!-- LAYER 2 MODAL -->
+  <div class="modal-overlay" id="layer2Modal">
+    <div class="opened-letter-sheet" style="display: block; max-width: 540px;">
+      <button class="modal-close-x" onclick="closeAllModals()">✕</button>
+      
+      <span style="display: inline-block; background: #ffe4ec; color: #c9184a; font-weight: 700; font-size: 0.78rem; padding: 4px 12px; border-radius: 12px; margin-bottom: 10px;">
+        🌹 Layer 2 Surprise
+      </span>
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 1.7rem; color: #c9184a; margin-bottom: 10px;">
+        A Special Bouquet & Message For Musu 💐
+      </h2>
+
+      <div style="font-size: 4rem; margin: 8px 0;">💐</div>
+
+      <div style="background: #fff5f8; border: 1px solid #ffd1dc; border-radius: 14px; padding: 16px 18px; text-align: left; margin-bottom: 16px;">
+        <p style="font-size: 0.98rem; line-height: 1.7; color: #4a2040; margin-bottom: 8px;">
+          Meri pyari <strong>Musu</strong>,
+        </p>
+        <p style="font-size: 0.94rem; line-height: 1.7; color: #5a2e50; margin-bottom: 8px;">
+          Yeh phool aur yeh duaayein sab tumhari us masoom aur pyari muskaan ke saamne kam hain. Tum meri zindagi ki wo roshni ho jo har andhere ko sukoon mein badal deti hai.
+        </p>
+        <p style="font-size: 0.94rem; line-height: 1.7; color: #5a2e50;">
+          Har saal tumhara aane wala kal pichle saal se bhi zyada khushiyon bhara, kamiyabi se mehka hua aur roshan ho! 🌸✨
+        </p>
+      </div>
+
+      <button class="next-step-btn" onclick="closeAllModals(); triggerCakeLayer3();">
+        <span>Now Open Layer 3 (3D Photo Memories) ➔</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- LAYER 3 SLIDESHOW -->
+  <div class="formal-slideshow-overlay" id="layer3Modal">
+    <button class="modal-close-x" onclick="closeLayer3()" style="position: absolute; top: 16px; right: 18px; z-index: 20;">✕</button>
+
+    <div style="text-align: center; margin-bottom: 10px;">
+      <h2 style="font-family: 'Great Vibes', cursive; font-size: 2.6rem; color: #ffd1dc;">
+        Musu's Beautiful 3D Memories ✨
+      </h2>
+      <p style="color: #ffccd5; font-size: 0.82rem;">Photos gracefully flying in from across the screen</p>
+    </div>
+
+    <div class="slideshow-stage-box" id="slideshowStage">
+      <div class="formal-polaroid-frame" id="polaroidFrame">
+        <div class="formal-slide-badge" id="slideBadge">Photo 0 / 31</div>
+        <img id="polaroidImg" class="formal-slide-img" src="" alt="Musu Memory Photo">
+        <div class="formal-slide-caption" id="slideCaption">Pure Sunshine ☀️</div>
+      </div>
+    </div>
+
+    <div class="slideshow-nav-bar">
+      <button class="slide-ctrl-btn" onclick="prevSlidePhoto()">⬅️ Prev</button>
+      <button class="slide-ctrl-btn" id="playBtn" onclick="toggleSlideAutoplay()" style="background: linear-gradient(135deg, #ff407d, #ff758c); border: none;">⏸ Pause</button>
+      <button class="slide-ctrl-btn" onclick="nextSlidePhoto()">Next ➡️</button>
+    </div>
+  </div>
+
+  <script>
+    const bgAudio = document.getElementById('bgAudio');
+    const princessAudio = document.getElementById('princessAudio');
+    const musicBtn = document.getElementById('musicBtn');
+    let isPlaying = false;
+    let isPrincessPlaying = false;
+
+    function playPrincessSongDirectly() {
+      bgAudio.pause();
+      musicBtn.classList.remove('playing');
+      isPlaying = false;
+      princessAudio.play().then(() => {
+        isPrincessPlaying = true;
+      }).catch(() => {});
+    }
+
+    function toggleMusic() {
+      if (isPlaying) {
+        bgAudio.pause();
+        musicBtn.classList.remove('playing');
+        isPlaying = false;
+      } else {
+        if (isPrincessPlaying) {
+          princessAudio.pause();
+          isPrincessPlaying = false;
+        }
+        bgAudio.play().then(() => {
+          musicBtn.classList.add('playing');
+          isPlaying = true;
+        }).catch(() => {});
+      }
+    }
+
+    function openYouTubeSong() {
+      playPrincessSongDirectly();
+      triggerCakeLayer3();
+    }
+
+    let activeBalloonIndex = 1;
+    const balloonData = {
+      1: {
+        title: "Mystery Gift 1 🌸",
+        icon: "🌸",
+        body: `
+          <h2 style="font-family:'Playfair Display',serif; font-size:1.55rem; color:#c9184a; margin-bottom:8px;">Welcome to Your Day, Musu! 💖</h2>
+          <p style="font-size:0.95rem; line-height:1.7; color:#5a2e50;">
+            Aaj ka din poori tarah se aapke naam hai! Is pyari si website ke har kone mein aapke liye chote-chote surprises aur dil se nikli duaayein sajayi gayi hain. Aaiye is pyare safar ko shuru karein!
+          </p>
+        `
+      },
+      2: {
+        title: "Mystery Gift 2 🎂",
+        icon: "🎉",
+        body: `
+          <h2 style="font-family:'Playfair Display',serif; font-size:1.55rem; color:#c9184a; margin-bottom:8px;">Happy Birthday, Nisafat Ahmed! 🎂</h2>
+          <p style="font-size:0.95rem; line-height:1.7; color:#5a2e50;">
+            A very, very Happy Birthday to the sweetest, most caring and charming person! May this year bring endless happiness, glowing health, peace of mind, and the sweetest smiles to your face every single day!
+          </p>
+        `
+      },
+      3: {
+        title: "Mystery Gift 3 ✨",
+        icon: "📸",
+        body: `
+          <h2 style="font-family:'Playfair Display',serif; font-size:1.55rem; color:#c9184a; margin-bottom:8px;">A Special Glimpse of My Musu ✨</h2>
+          <div class="single-photo-box">
+            <img src="herpic.jpg/photo_18.jpg" alt="Musu Photo 18" onerror="this.src='herpic.jpg/herpic.jpg(18).jpg.jpeg'">
+          </div>
+          <div class="romantic-shayari-card">
+            "Chehre pe muskaan aur aankhon mein noor hai, ✨<br>
+            Tu door ho kar bhi dil ke sabse kareeb zaroor hai... ❤️<br>
+            Teri ek jhalak se hi roshan ho jaati hai meri duniya,<br>
+            Tu meri kismat, mera sukoon, mera sabse pyara guroor hai! 🌸"
+          </div>
+        `
+      },
+      4: {
+        title: "Mystery Gift 4 🕯️",
+        icon: "🎂",
+        body: `
+          <h2 style="font-family:'Playfair Display',serif; font-size:1.55rem; color:#c9184a; margin-bottom:8px;">Make a Wish, Birthday Girl! 🕯️✨</h2>
+          <p style="font-size:0.95rem; line-height:1.7; color:#5a2e50; margin-bottom:12px;">
+            Aankhein band kijiye, dil se apni wish maangiye, aur cake par tap karke candles blow kijiye!
+          </p>
+          <div id="blowCandleArea" style="font-size:3.5rem; cursor:pointer; margin: 8px 0;" onclick="blowCandlesFx()">
+            🎂🕯️
+          </div>
+          <p id="wishDoneText" style="display:none; color:#c9184a; font-weight:700; font-family:'Dancing Script',cursive; font-size:1.5rem;">
+            🌟 Woohoo! May all your biggest dreams come true! 🌟
+          </p>
+        `
+      },
+      5: {
+        title: "Mystery Gift 5 💌",
+        icon: "💌",
+        body: `
+          <h2 style="font-family:'Playfair Display',serif; font-size:1.55rem; color:#c9184a; margin-bottom:8px;">To My Sweet Musu, My Peace ❤️</h2>
+          <div style="background:#fff5f8; border-radius:12px; padding:14px; text-align:left;">
+            <p style="font-size:0.92rem; line-height:1.7; color:#4a2040; margin-bottom:6px;">
+              Meri pyari <strong>Musu (Nisafat)</strong>,
+            </p>
+            <p style="font-size:0.92rem; line-height:1.7; color:#5a2e50; margin-bottom:6px;">
+              Tum meri zindagi ka wo anmol hissa ho jiske aane se har lamha khoobsurat aur roshan ho gaya. Tumhari samajhdari, pyaari hansi aur be-shart saath sabse badi daulat hai.
+            </p>
+            <p style="font-size:0.92rem; line-height:1.7; color:#5a2e50;">
+              Chahe kitni bhi mushkilein kyun na ho, tumse do pal baat karke jo sukoon milta hai, wo kisi aur cheez mein nahi. Main hamesha tumhare saath khada rahunga! 💖
+            </p>
+          </div>
+        `
+      },
+      6: {
+        title: "Mystery Gift 6 🤲",
+        icon: "🤲",
+        body: `
+          <h2 style="font-family:'Playfair Display',serif; font-size:1.55rem; color:#c9184a; margin-bottom:8px;">A Special Prayer for Musu's Life 🌟</h2>
+          <div class="dua-wrapper-box">
+            <img class="dua-illustration-img" src="herpic.jpg/cute_dua_girl.jpg" alt="Cute Dua Girl" onerror="this.src='herpic.jpg/photo_0.jpg'">
+            <p style="font-size:0.96rem; line-height:1.8; color:#6b1d44; font-style:italic; font-family:'Playfair Display',serif;">
+              "Ya Allah, meri pyari Musu ko behtareen tandurusti, aafiyat aur lambi khushiyon bhari zindagi ata farma; uske ilm, samajh aur zahanat mein barkat de aur uske har faisle mein khair paida farma; zindagi ke har mod par usey azeem kamiyabi aur izzat ata farma; uski aankhon mein kabhi gham ka aansoo na aaye, uski pyari muskaan hamesha aisi hi khilkhilati rahe, aur uski zindagi hamesha barkaton se mehke. Ameen Summa Ameen! 🤲✨"
+            </p>
+          </div>
+        `
+      },
+      7: {
+        title: "Mystery Gift 7 🌟",
+        icon: "🌟",
+        body: `
+          <h2 style="font-family:'Playfair Display',serif; font-size:1.55rem; color:#c9184a; margin-bottom:8px;">One in a Billion Soul 🌸</h2>
+          <p style="font-size:0.95rem; line-height:1.7; color:#5a2e50;">
+            Musu, tumhari sabse pyari baat ye hai ki tumhara dil bilkul saaf hai. Tum sabhi ke chehre par bina kisi matlab ke muskaan laati ho aur sabka khayal rakhti ho. Having someone as pure and kind as you in my life is a true blessing!
+          </p>
+        `
+      },
+      8: {
+        title: "Mystery Gift 8 👑",
+        icon: "👑",
+        body: `
+          <h2 style="font-family:'Playfair Display',serif; font-size:1.55rem; color:#c9184a; margin-bottom:8px;">The 3-Layer Cake Finale! 🎂</h2>
+          <p style="font-size:0.95rem; line-height:1.7; color:#5a2e50; margin-bottom:12px;">
+            Aapne saare surprise balloons explore kar liye! Ab neeche diye huye 3-Layer Cake ki layers par tap karke grand celebration dekhiye!
+          </p>
+          <button class="next-step-btn" onclick="closeAllModals(); triggerCakeLayer1();">
+            <span>Tap Cake Layer 1 Now! ➔</span>
+          </button>
+        `
+      }
+    };
+
+    function triggerBalloonOpen(num) {
+      activeBalloonIndex = num;
+      const data = balloonData[num];
+      document.getElementById('promptTitle').innerText = data.title;
+      document.getElementById('promptIcon').innerText = data.icon;
+      document.getElementById('envelopePromptCard').style.display = 'block';
+      document.getElementById('openedLetterSheet').style.display = 'none';
+      document.getElementById('balloonModal').classList.add('active');
+    }
+
+    function revealLetterContent() {
+      const data = balloonData[activeBalloonIndex];
+      document.getElementById('dynamicLetterBody').innerHTML = data.body;
+      document.getElementById('envelopePromptCard').style.display = 'none';
+      document.getElementById('openedLetterSheet').style.display = 'block';
+    }
+
+    function closeAllModals() {
+      document.getElementById('balloonModal').classList.remove('active');
+      document.getElementById('layer2Modal').classList.remove('active');
+    }
+
+    function blowCandlesFx() {
+      document.getElementById('blowCandleArea').innerHTML = '🎂✨💨';
+      document.getElementById('wishDoneText').style.display = 'block';
+    }
+
+    function triggerCakeLayer1() {
+      const banner = document.getElementById('layer1Banner');
+      banner.classList.add('active');
+
+      const words = [
+        { id: 'word1', anim: 'from-left' },
+        { id: 'word2', anim: 'from-top' },
+        { id: 'word3', anim: 'from-right' },
+        { id: 'word4', anim: 'from-bottom' }
+      ];
+      words.forEach(w => {
+        const el = document.getElementById(w.id);
+        el.className = 'fly-word ' + w.anim;
+      });
+    }
+
+    function closeLayer1() {
+      document.getElementById('layer1Banner').classList.remove('active');
+    }
+
+    function triggerCakeLayer2() {
+      document.getElementById('layer2Modal').classList.add('active');
+    }
+
+    let currentPhotoIndex = 0;
+    const totalPhotos = 31;
+    let autoplayTimer = null;
+    let isAutoplaying = true;
+
+    const flyAnimations = [
+      'fly-in-left',
+      'fly-in-top',
+      'fly-in-right',
+      'fly-in-bottom',
+      'fly-in-center'
+    ];
+
+    const shortFormalCaptions = [
+      "Pure Sunshine ☀️", "Sweetest Smile 🌸", "Forever Radiant ✨",
+      "Childhood Innocence 🧸", "Precious Moments 💕", "Always Glowing 🌺",
+      "Heart of Gold 💖", "Unmatched Charm 🌟", "Grace & Elegance 🌸",
+      "My Favorite Sight ✨", "True Blessing 🌟", "Endless Happiness 💕",
+      "Captivating Eyes 🌸", "Dil Ka Sukoon ❤️", "One in a Billion 🌟",
+      "Sweet Muskaan 💖", "Beautiful Soul 🌸", "A Heart Full of Love ✨",
+      "Cherished Moments 💕", "Golden Memories 🌟", "Infectious Joy 🌸",
+      "Pure Kindness 💖", "Queen of Hearts 👑", "Always Smiling 🌸",
+      "Treasured Moments ✨", "Unforgettable Grace 💖", "My Anchor ❤️",
+      "Gentle Breeze 🌸", "Full of Wonder 🌟", "Sparkling Glow ✨",
+      "Precious Gem 💎", "Forever Musu ❤️"
+    ];
+
+    function triggerCakeLayer3() {
+      document.getElementById('layer3Modal').classList.add('active');
+      playPrincessSongDirectly();
+
+      currentPhotoIndex = 0;
+      loadAndFlyPhoto();
+
+      clearInterval(autoplayTimer);
+      isAutoplaying = true;
+      document.getElementById('playBtn').innerText = '⏸ Pause';
+      autoplayTimer = setInterval(nextSlidePhoto, 3000);
+    }
+
+    function closeLayer3() {
+      document.getElementById('layer3Modal').classList.remove('active');
+      clearInterval(autoplayTimer);
+      isAutoplaying = false;
+    }
+
+    function loadAndFlyPhoto() {
+      const frame = document.getElementById('polaroidFrame');
+      const img = document.getElementById('polaroidImg');
+
+      flyAnimations.forEach(cls => frame.classList.remove(cls));
+      frame.style.opacity = '0';
+
+      const anim = flyAnimations[currentPhotoIndex % flyAnimations.length];
+
+      img.src = `herpic.jpg/photo_${currentPhotoIndex}.jpg`;
+      img.onerror = function() {
+        this.src = `herpic.jpg/herpic.jpg(${currentPhotoIndex}).jpg.jpeg`;
+      };
+
+      document.getElementById('slideBadge').innerText = `Photo ${currentPhotoIndex} / ${totalPhotos}`;
+      document.getElementById('slideCaption').innerText = shortFormalCaptions[currentPhotoIndex] || "Beautiful Musu ✨";
+
+      requestAnimationFrame(() => {
+        frame.classList.add(anim);
+      });
+    }
+
+    function nextSlidePhoto() {
+      currentPhotoIndex = (currentPhotoIndex + 1) > totalPhotos ? 0 : currentPhotoIndex + 1;
+      loadAndFlyPhoto();
+    }
+
+    function prevSlidePhoto() {
+      currentPhotoIndex = (currentPhotoIndex - 1) < 0 ? totalPhotos : currentPhotoIndex - 1;
+      loadAndFlyPhoto();
+    }
+
+    function toggleSlideAutoplay() {
+      const btn = document.getElementById('playBtn');
+      if (isAutoplaying) {
+        clearInterval(autoplayTimer);
+        isAutoplaying = false;
+        btn.innerText = '▶ Auto Play';
+      } else {
+        isAutoplaying = true;
+        btn.innerText = '⏸ Pause';
+        autoplayTimer = setInterval(nextSlidePhoto, 3000);
+      }
+    }
+
+    /* Ultra-lightweight particle engine (low CPU usage) */
+    const canvas = document.getElementById('fxCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class MiniHeart {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + 15;
+        this.size = Math.random() * 12 + 8;
+        this.speedY = -(Math.random() * 1.2 + 0.6);
+        this.char = ['🌸', '💖', '✨'][Math.floor(Math.random() * 3)];
+      }
+      update() {
+        this.y += this.speedY;
+        if (this.y < -20) this.reset();
+      }
+      draw(ctx) {
+        ctx.font = `${this.size}px serif`;
+        ctx.fillText(this.char, this.x, this.y);
+      }
+    }
+
+    // Sirf 10 particles rakhe hain taaki hang bilkul na ho
+    for (let i = 0; i < 10; i++) {
+      particles.push(new MiniHeart());
+    }
+
+    function animLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw(ctx);
+      }
+      requestAnimationFrame(animLoop);
+    }
+    requestAnimationFrame(animLoop);
+  </script>
+
+</body>
+</html>
